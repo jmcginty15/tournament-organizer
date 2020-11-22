@@ -1,0 +1,22 @@
+body {
+    background-color: tan;
+    align-content: center;
+}
+
+h1 {
+    margin: 25px;
+    /* width: 50%; */
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.right-float {
+    float: right;
+}
+
+.list-container {
+    width: fit-content;
+    max-width: 100vw;
+    margin: auto;
+}

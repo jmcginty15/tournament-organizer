@@ -11,6 +11,22 @@ h1 {
     text-align: center;
 }
 
+h3 {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#standings, #this-week, #schedule {
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;  
+}
+
+.score-box {
+    text-align: center;
+}
+
 .right-float {
     float: right;
 }
@@ -19,4 +35,68 @@ h1 {
     width: fit-content;
     max-width: 100vw;
     margin: auto;
+    padding: 5px;
+}
+
+.nav-link:hover {
+    cursor: pointer;
+}
+
+.active {
+    font-weight: bold;
+}
+
+#this-week, #schedule {
+    display: none;
+}
+
+#nav-bar {
+    justify-content: center;
+}
+
+.white {
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;
+    background-color: white;
+}
+
+.black {
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;
+    background-color: black;
+}
+
+.schedule-button, .report-button, .cancel-button, .result-button, .score-button {
+    padding: 3px !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+}
+
+.schedule-button-container {
+    text-align: right;
+}
+
+#scheduler-form, #report-form, #admin-login, #result-form, #score-form {
+    position: fixed;
+    height: fit-content;
+    width: fit-content;
+    max-width: 100vw;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    background-color: tan;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;  
+}
+
+#report-form {
+    max-width: min(100vw, 460px);
+}
+
+.flash-message {
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+    padding: 5px;
 }

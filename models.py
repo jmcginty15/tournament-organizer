@@ -21,10 +21,12 @@ class Player(db.Model):
     first_name = db.Column(db.String(), nullable=False)
     last_name = db.Column(db.String(), nullable=False)
     username = db.Column(db.String(), nullable=False, unique=True)
-    score = db.Column(db.Float, default=0)
+    url = db.Column(db.String(), nullable=False, unique=True)
+    rating = db.Column(db.Integer, nullable=False)
+    needs_update = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
-        return f'<Player id: {self.id}, first_name: {self.first_name}, last_name: {self.last_name}, username: {self.username}>'
+        return f'<Player id: {self.id}, first_name: {self.first_name}, last_name: {self.last_name}, username: {self.username}, rating: {self.rating}>'
 
 
 class Game(db.Model):
@@ -36,10 +38,12 @@ class Game(db.Model):
     white = db.Column(db.Integer, db.ForeignKey('Players.id'), nullable=False)
     black = db.Column(db.Integer, db.ForeignKey('Players.id'), nullable=False)
     url = db.Column(db.String(), nullable=True)
+    week = db.Column(db.Integer)
     schedule = db.Column(db.DateTime(timezone=True))
     tournament = db.Column(db.Integer, db.ForeignKey(
         'Tournaments.id'), nullable=False)
     result = db.Column(db.String())
+    needs_update = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
         return f'<Game id: {self.id}, white: {self.white}, black: {self.black}, url: {self.url}, schedule: {self.schedule}, tournament: {self.tournament}, result: {self.result}>'
@@ -53,7 +57,12 @@ class Tournament(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(), nullable=False)
     start_date = db.Column(db.Date())
+    end_date = db.Column(db.Date())
     time_control = db.Column(db.String(), nullable=False)
+    current_week = db.Column(db.Integer, nullable=False, default=1)
+    first = db.Column(db.String())
+    second = db.Column(db.String())
+    third = db.Column(db.String())
     games = db.relationship('Game')
     players = db.relationship('Player', secondary='Player_Tournaments')
 
@@ -73,3 +82,29 @@ class PlayerTournament(db.Model):
         db.Integer, db.ForeignKey('Tournaments.id'), nullable=False)
     seed = db.Column(db.Integer)
     pool = db.Column(db.String(1))
+    score = db.Column(db.Float, default=0)
+    advances = db.Column(db.Boolean, default=False)
+    player = db.relationship('Player')
+
+
+class Admin(db.Model):
+    """Admin"""
+
+    __tablename__ = 'Admins'
+
+    username = db.Column(db.String(20), primary_key=True)
+    password = db.Column(db.String(), nullable=False)
+
+    @classmethod
+    def register(cls, username, password):
+        pw_hash = bcrypt.generate_password_hash(password)
+        pw_hash_utf8 = pw_hash.decode('utf8')
+        return cls(username=username, password=pw_hash_utf8)
+
+    @classmethod
+    def authenticate(cls, username, password):
+        user = Admin.query.filter_by(username=username).first()
+        if user and bcrypt.check_password_hash(user.password, password):
+            return user
+        else:
+            return False

@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin{% endblock %}
+
+{% block content %}
+<h2>Tournament ID: <span id="tournament-id">{{ tournament_id }}</span></h2>
+<h3>Players</h3>
+<ul class="list-group">
+    {% for player in players %}
+    <li class="list-group-item">{{ player.username }}<br>
+        Current Score: <span id="score-container-{{ player.id }}">{{ player.score }}</span><br>
+        <button type="button" id="score-{{ player.id }}" class="btn btn-outline-secondary score-button">Update Score</button>
+    </li>
+    {% endfor %}
+</ul>
+<h3>Games</h3>
+<ul class="list-group">
+    {% for game in games %}
+    <li class="list-group-item">
+        <div class="row">
+            <div class="col-10">
+                <h6><span class="white">&nbsp;&nbsp;&nbsp;&nbsp;</span> <a href="{{ game.white.url }}"
+                        target="_blank">{{ game.white.username }}</a> <small
+                        class="text-muted">{{ game.white.rating }}</small></h6>
+            </div>
+            <div class="col-2">
+                <a href="{{ game.url }}" class="btn btn-outline-secondary schedule-button" target="_blank">Game URL</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-10">
+                <h6><span class="black">&nbsp;&nbsp;&nbsp;&nbsp;</span> <a href="{{ game.black.url }}"
+                        target="_blank">{{ game.black.username }}</a> <small
+                        class="text-muted">{{ game.black.rating }}</small></h6>
+            </div>
+            <div class="col-2" id="result-container-{{ game.id }}">
+                <button type="button" id="result-{{ game.id }}" class="btn btn-outline-secondary result-button">Add
+                    Result</button>
+            </div>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+<div id="result-form"></div>
+<div id="score-form"></div>
+{% endblock %}

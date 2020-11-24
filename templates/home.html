@@ -5,13 +5,40 @@
 {% block content %}
 <h1>Tournaments</h1>
 <div class="list-container">
+    {% for message in get_flashed_messages() %}<p class="alert-{{ flash_class }} flash-message">{{ message }}</p>{% endfor %}
     <ul class="list-group">
         {% for tournament in tournaments %}
         <li class="list-group-item">
             <h5 class="mb-1"><a href="/tournaments/{{ tournament.id }}">{{ tournament.name }}</a></h5>
+            {% if tournament.start_date > today %}Starts{% elif tournament.end_date %}Ended{% else %}Started{% endif %}
             {{ tournament.start_date }} | {{ tournament.time_control }} | {{ tournament.players|length }} players
         </li>
         {% endfor %}
     </ul>
+    <br>
+    <div class="schedule-button-container">
+        <button type="button" id="admin-login-button" class="btn btn-outline-secondary schedule-button">Admin
+            Login</button>
+    </div>
+</div>
+<div id="admin-login">
+    <div class="list-container">
+        <h3>Admin Login</h3>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <form id="admin-form" action="/admin/login" method="POST">
+                    <label for="username">Username:</label>&nbsp;
+                    <span class="right-float"><input type="text" name="username" required></span><br>
+                    <label for="password">Password:</label>&nbsp;
+                    <span class="right-float"><input type="password" name="password" required></span><br>
+                    <div class="schedule-button-container">
+                        <button type="submit" class="btn btn-outline-success schedule-button">Submit</button>
+                        <button type="button" id="login-cancel"
+                            class="btn btn-outline-danger cancel-button">Cancel</button>
+                    </div>
+                </form>
+            </li>
+        </ul>
+    </div>
 </div>
 {% endblock %}

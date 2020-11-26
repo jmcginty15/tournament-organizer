@@ -11,7 +11,7 @@
         <li class="list-group-item">
             <h5 class="mb-1"><a href="/tournaments/{{ tournament.id }}">{{ tournament.name }}</a></h5>
             {% if tournament.start_date > today %}Starts{% elif tournament.end_date %}Ended{% else %}Started{% endif %}
-            {{ tournament.start_date }} | {{ tournament.time_control }} | {{ tournament.players|length }} players
+            {{ tournament.start_date.strftime('%a %b %d %Y') }} | {{ tournament.time_control }} | {{ tournament.players|length }} players
         </li>
         {% endfor %}
     </ul>

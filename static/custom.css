@@ -20,7 +20,7 @@ h3 {
 #standings, #this-week, #schedule {
     background-color: white;
     border: 1px solid rgba(0, 0, 0, 0.125);
-    border-radius: 0.25rem;  
+    border-radius: 0.25rem;
 }
 
 .score-box {

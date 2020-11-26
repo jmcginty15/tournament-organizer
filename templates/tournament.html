@@ -13,93 +13,92 @@
         <li class="nav-item"><a id="this-week-nav" class="nav-link">This Week</a></li>
         <li class="nav-item"><a id="schedule-nav" class="nav-link">Full Schedule</a></li>
     </ul>
-    <div id="standings" class="row">
-        {% for pool in pools %}
-        <div class="col-6 pool-grid">
-            <h3>{{ pool.name }}</h3>
-            <ul class="list-group">
-                {% for player in pool.standings %}
-                <li id="player-{{ player.seed }}" class="list-group-item">
-                    <div class="row">
-                        <div class="col-10">
-                            <h6><small class="text-muted">{{ player.seed }}</small> {{ player.first_name }}
-                                {{ player.last_name }} <small class="text-muted">{{ player.rating }}</small></h6>
-                            <a href="{{ player.url }}" target="_blank">{{ player.username }}</a>
-                        </div>
-                        <div class="col-2 score-box">{{ player.score }}</div>
-                    </div>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
-        {% endfor %}
-    </div>
-    <div id="this-week">
-        <ul class="list-group">
-            <li class="list-group-item">
-                <h3>{{ current_week.name }}</h3>
+    <div id="standings" class="container">
+        <div class="row">
+            {% for pool in pools %}
+            <div class="col-6 pool-grid">
+                <h3>{{ pool.name }}</h3>
                 <ul class="list-group">
-                    {% for game in current_week.games %}
-                    <li class="list-group-item">
-                        <div class="row">
-                            <div class="col-12">
-                                {% if game.result %}
-                                <small class="text-muted">Game complete</small>
-                                {% else %}
-                                <small
-                                    class="text-muted">{% if game.schedule %}{{ game.schedule.strftime('%a %b %d, %I:%M %p') }}{% else %}Schedule
-                                    TBD{% endif %}</small>
-                                {% endif %}
-                            </div>
-                        </div>
+                    {% for player in pool.standings %}
+                    <li id="player-{{ player.seed }}" class="list-group-item">
                         <div class="row">
                             <div class="col-10">
-                                <h6><span class="white">&nbsp;&nbsp;&nbsp;&nbsp;</span> <a href="{{ game.white.url }}"
-                                        target="_blank">{{ game.white.username }}</a> <small
-                                        class="text-muted">{{ game.white.rating }}</small></h6>
+                                <h6><small class="text-muted">{{ player.seed }}</small> {{ player.first_name }}
+                                    {{ player.last_name }} <small class="text-muted"><em>{{ player.rating }}</em></small></h6>
+                                <a href="{{ player.url }}" target="_blank">{{ player.username }}</a>
                             </div>
-                            <div class="col-2 score-box">
-                                {% if game.result %}{% if game.result == '1-0' %}1{% elif game.result == '0.5-0.5' %}0.5{% else %}0{% endif %}{% endif %}
-                            </div>
+                            <div class="col-2 score-box">{{ player.score }}</div>
                         </div>
-                        <div class="row">
-                            <div class="col-10">
-                                <h6><span class="black">&nbsp;&nbsp;&nbsp;&nbsp;</span> <a href="{{ game.black.url }}"
-                                        target="_blank">{{ game.black.username }}</a> <small
-                                        class="text-muted">{{ game.black.rating }}</small></h6>
-                            </div>
-                            <div class="col-2 score-box">
-                                {% if game.result %}{% if game.result == '0-1' %}1{% elif game.result == '0.5-0.5' %}0.5{% else %}0{% endif %}{% endif %}
-                            </div>
-                        </div>
-                        {% if game.result %}
-                        <div class="row">
-                            <div class="col-12 schedule-button-container">
-                                <a href="{{ game.url }}" target="_blank" class="btn btn-outline-success schedule-button">View Game</a>
-                            </div>
-                        </div>
-                        {% else %}
-                        <div class="row">
-                            <div class="col-6"><button type="button" id="schedule-{{ game.id }}"
-                                    class="btn btn-outline-secondary schedule-button">{% if game.schedule %}Reschedule{% else %}Schedule{% endif %}</button>
-                            </div>
-                            <div class="col-6 schedule-button-container">
-                                <button type="button" id="report-{{ game.id }}"
-                                    class="btn btn-outline-success report-button">Report
-                                    Result</button>
-                            </div>
-                        </div>
-                        {% endif %}
                     </li>
                     {% endfor %}
                 </ul>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div id="this-week">
+        <h3>{{ current_week.name }}</h3>
+        <ul class="list-group">
+            {% for game in current_week.games %}
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-12">
+                        {% if game.result %}
+                        <small class="text-muted">Game complete</small>
+                        {% else %}
+                        <small
+                            class="text-muted">{% if game.schedule %}{{ game.schedule.strftime('%a %b %d, %I:%M %p') }}{% else %}Schedule
+                            TBD{% endif %}</small>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-10">
+                        <h6><span class="white">&nbsp;&nbsp;&nbsp;&nbsp;</span> <a href="{{ game.white.url }}"
+                                target="_blank">{{ game.white.username }}</a> <small
+                                class="text-muted"><em>{{ game.white.rating }}</em></small></h6>
+                    </div>
+                    <div class="col-2 score-box">
+                        {% if game.result %}{% if game.result == '1-0' %}1{% elif game.result == '0.5-0.5' %}0.5{% else %}0{% endif %}{% endif %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-10">
+                        <h6><span class="black">&nbsp;&nbsp;&nbsp;&nbsp;</span> <a href="{{ game.black.url }}"
+                                target="_blank">{{ game.black.username }}</a> <small
+                                class="text-muted"><em>{{ game.black.rating }}</em></small></h6>
+                    </div>
+                    <div class="col-2 score-box">
+                        {% if game.result %}{% if game.result == '0-1' %}1{% elif game.result == '0.5-0.5' %}0.5{% else %}0{% endif %}{% endif %}
+                    </div>
+                </div>
+                {% if game.result %}
+                <div class="row">
+                    <div class="col-12 schedule-button-container">
+                        <a href="{{ game.url }}" target="_blank" class="btn btn-outline-success schedule-button">View
+                            Game</a>
+                    </div>
+                </div>
+                {% else %}
+                <div class="row">
+                    <div class="col-6"><button type="button" id="schedule-{{ game.id }}"
+                            class="btn btn-outline-secondary schedule-button">{% if game.schedule %}Reschedule{% else %}Schedule{% endif %}</button>
+                    </div>
+                    <div class="col-6 schedule-button-container">
+                        <button type="button" id="report-{{ game.id }}"
+                            class="btn btn-outline-success report-button">Report
+                            Result</button>
+                    </div>
+                </div>
+                {% endif %}
             </li>
+            {% endfor %}
         </ul>
     </div>
-    <div id="schedule">
-        <ul class="list-group">
+    <div id="schedule" class="container">
+        <div class="row">
             {% for week in weeks %}
-            <li class="list-group-item">
+            <div class="col-6 schedule-grid">
                 <h3>{{ week.name }}</h3>
                 <ul class="list-group">
                     {% for game in week.games %}
@@ -119,7 +118,7 @@
                             <div class="col-10">
                                 <h6><span class="white">&nbsp;&nbsp;&nbsp;&nbsp;</span> <a href="{{ game.white.url }}"
                                         target="_blank">{{ game.white.username }}</a> <small
-                                        class="text-muted">{{ game.white.rating }}</small></h6>
+                                        class="text-muted"><em>{{ game.white.rating }}</em></small></h6>
                             </div>
                             <div class="col-2 score-box">
                                 {% if game.result %}{% if game.result == '1-0' %}1{% elif game.result == '0.5-0.5' %}0.5{% else %}0{% endif %}{% endif %}
@@ -129,7 +128,7 @@
                             <div class="col-10">
                                 <h6><span class="black">&nbsp;&nbsp;&nbsp;&nbsp;</span> <a href="{{ game.black.url }}"
                                         target="_blank">{{ game.black.username }}</a> <small
-                                        class="text-muted">{{ game.black.rating }}</small></h6>
+                                        class="text-muted"><em>{{ game.black.rating }}</em></small></h6>
                             </div>
                             <div class="col-2 score-box">
                                 {% if game.result %}{% if game.result == '0-1' %}1{% elif game.result == '0.5-0.5' %}0.5{% else %}0{% endif %}{% endif %}
@@ -138,7 +137,9 @@
                         {% if game.result %}
                         <div class="row">
                             <div class="col-12 schedule-button-container">
-                                <a href="{{ game.url }}" target="_blank" class="btn btn-outline-success schedule-button">View Game</a>
+                                <a href="{{ game.url }}" target="_blank"
+                                    class="btn btn-outline-success schedule-button">View
+                                    Game</a>
                             </div>
                         </div>
                         {% else %}
@@ -156,9 +157,9 @@
                     </li>
                     {% endfor %}
                 </ul>
-            </li>
+            </div>
             {% endfor %}
-        </ul>
+        </div>
     </div>
     {% if admin %}
     <div class="schedule-button-container">

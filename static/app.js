@@ -1,4 +1,5 @@
 const $poolGrids = $('.pool-grid');
+const $scheduleGrids = $('.schedule-grid');
 const $standingsButton = $('#standings-nav');
 const $standingsDisplay = $('#standings');
 const $thisWeekButton = $('#this-week-nav');
@@ -23,6 +24,9 @@ const BASE_URL = 'http://127.0.0.1:5000';
 if (window.innerWidth <= 550) {
     $poolGrids.addClass('col-12');
     $poolGrids.removeClass('col-6');
+
+    $scheduleGrids.addClass('col-12');
+    $scheduleGrids.removeClass('col-6');
 }
 
 $standingsButton.on('click', function () {
@@ -120,7 +124,6 @@ $scheduleGameButton.on('click', async function (evt) {
 
     res = await axios.get(`${BASE_URL}/games/${gameId}`);
     const game = res.data;
-    console.log(game);
 
     let scheduleBlock = '';
     if (game.schedule) {

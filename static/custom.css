@@ -23,6 +23,11 @@ h3 {
     border-radius: 0.25rem;
 }
 
+#schedule {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
 .score-box {
     text-align: center;
 }

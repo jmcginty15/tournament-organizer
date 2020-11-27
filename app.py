@@ -53,12 +53,13 @@ def tournament(id):
     weeks = sort_weeks(games)
 
     current_week = weeks[tournament.current_week - 1]
+    current_week_ends = datetime.datetime(2020, 12, 6, 18, 0)
 
     admin = False
     if session.get('admin'):
         admin = True
 
-    return render_template('tournament.html', tournament=tournament, pools=pools, weeks=weeks, current_week=current_week, admin=admin)
+    return render_template('tournament.html', tournament=tournament, pools=pools, weeks=weeks, current_week=current_week, current_week_ends=current_week_ends, admin=admin)
 
 
 @app.route('/games/<int:id>')

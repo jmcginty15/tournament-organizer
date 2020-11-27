@@ -38,6 +38,7 @@
     </div>
     <div id="this-week">
         <h3>{{ current_week.name }}</h3>
+        <p id="week-end-date" class="text-muted"><em>Ends {{ current_week_ends.strftime('%a %b %d, %I:%M %p') }}</em></p>
         <ul class="list-group">
             {% for game in current_week.games %}
             <li class="list-group-item">

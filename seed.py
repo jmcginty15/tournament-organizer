@@ -9,42 +9,54 @@ db.reflect()
 db.drop_all()
 db.create_all()
 
-username='jmcginty15'
+username = 'jmcginty15'
 user = lichess.api.user(username)
 jm = Player(first_name='Jason', last_name='McGinty', username=username, url=f'https://lichess.org/@/{username}', rating=user['perfs']['classical']['rating'])
 username = 'zach_mcginty'
 user = lichess.api.user(username)
 zm = Player(first_name='Zach', last_name='McGinty', username=username, url=f'https://lichess.org/@/{username}', rating=user['perfs']['classical']['rating'])
-username='harbed_325'
+username = 'harbed_325'
 user = lichess.api.user(username)
 eh = Player(first_name='Edward', last_name='Harbeck', username=username, url=f'https://lichess.org/@/{username}', rating=user['perfs']['classical']['rating'])
-username='Iarwain_Ben-adar'
+username = 'Iarwain_Ben-adar'
 user = lichess.api.user(username)
 jd = Player(first_name='Joe', last_name='Davis', username=username, url=f'https://lichess.org/@/{username}', rating=user['perfs']['classical']['rating'])
-username='Hegemon78'
+username = 'Hegemon78'
 user = lichess.api.user(username)
 ad = Player(first_name='Adam', last_name='Darby', username=username, url=f'https://lichess.org/@/{username}', rating=user['perfs']['classical']['rating'])
-username='PDavison'
+username = 'PDavison'
 user = lichess.api.user(username)
 pd = Player(first_name='Paul', last_name='Davison', username=username, url=f'https://lichess.org/@/{username}', rating=user['perfs']['classical']['rating'])
-username='Dwang_ho'
+username = 'Dwang_ho'
 user = lichess.api.user(username)
 bh = Player(first_name='Britt', last_name='Hoover', username=username, url=f'https://lichess.org/@/{username}', rating=user['perfs']['classical']['rating'])
-username='Macondo_Iceman'
+username = 'Macondo_Iceman'
 user = lichess.api.user(username)
 jr = Player(first_name='Jeff', last_name='Rooney', username=username, url=f'https://lichess.org/@/{username}', rating=user['perfs']['classical']['rating'])
-username='lawbooks10'
+username = 'lawbooks10'
 user = lichess.api.user(username)
 br = Player(first_name='Brian', last_name='Reeves', username=username, url=f'https://lichess.org/@/{username}', rating=user['perfs']['classical']['rating'])
-username='BrianHellstrom'
+username = 'BrianHellstrom'
 user = lichess.api.user(username)
 bhe = Player(first_name='Brian', last_name='Hellstrom', username=username, url=f'https://lichess.org/@/{username}', rating=user['perfs']['classical']['rating'])
-username='afader'
+username = 'afader'
 user = lichess.api.user(username)
 af = Player(first_name='Alex', last_name='Fader', username=username, url=f'https://lichess.org/@/{username}', rating=user['perfs']['classical']['rating'])
-username='godelchess'
+username = 'godelchess'
 user = lichess.api.user(username)
 dba = Player(first_name='Dennis', last_name='Baker', username=username, url=f'https://lichess.org/@/{username}', rating=user['perfs']['classical']['rating'])
+username = 'pawannelson'
+user = lichess.api.user(username)
+pn = Player(first_name='Pawan', last_name='Nelson', username=username, url=f'https://lichess.org/@/{username}', rating=user['perfs']['classical']['rating'])
+username = 'pjamison'
+user = lichess.api.user(username)
+pj = Player(first_name='Paul', last_name='Jamison', username=username, url=f'https://lichess.org/@/{username}', rating=user['perfs']['classical']['rating'])
+username = 'Capt_Sal'
+user = lichess.api.user(username)
+sr = Player(first_name='Sal', last_name='Randazzo', username=username, url=f'https://lichess.org/@/{username}', rating=user['perfs']['classical']['rating'])
+username = 'Toranaga-Minowara'
+user = lichess.api.user(username)
+jw = Player(first_name='Jake', last_name='Wilson', username=username, url=f'https://lichess.org/@/{username}', rating=user['perfs']['classical']['rating'])
 
 db.session.add(jm)
 db.session.add(zm)
@@ -58,6 +70,10 @@ db.session.add(br)
 db.session.add(bhe)
 db.session.add(af)
 db.session.add(dba)
+db.session.add(pn)
+db.session.add(pj)
+db.session.add(sr)
+db.session.add(jw)
 
 db.session.commit()
 
@@ -66,42 +82,54 @@ tourney = Tournament(name='Inaugural OGB Online Chess Championship', start_date=
 db.session.add(tourney)
 db.session.commit()
 
-game1 = Game(white=12, black=4, tournament=1, week=1, result='1-0')
-game2 = Game(white=4, black=12, tournament=1, week=1, result='0-1')
-game3 = Game(white=3, black=7, tournament=1, week=1, result='0.5-0.5')
-game4 = Game(white=7, black=3, tournament=1, week=1, result='0-0')
-game5 = Game(white=2, black=6, tournament=1, week=1, schedule=datetime.datetime(2020, 12, 5, 14, 50))
-game6 = Game(white=6, black=2, tournament=1, week=1)
-game7 = Game(white=5, black=11, tournament=1, week=1, schedule=datetime.datetime(2020, 12, 5, 14, 50))
-game8 = Game(white=11, black=5, tournament=1, week=1)
-game9 = Game(white=8, black=9, tournament=1, week=1)
-game10 = Game(white=9, black=8, tournament=1, week=1)
-game11 = Game(white=1, black=10, tournament=1, week=1)
-game12 = Game(white=10, black=1, tournament=1, week=1)
-game13 = Game(white=12, black=3, tournament=1, week=2)
-game14 = Game(white=3, black=12, tournament=1, week=2, schedule=datetime.datetime(2020, 12, 5, 00, 50))
-game15 = Game(white=4, black=7, tournament=1, week=2)
-game16 = Game(white=7, black=4, tournament=1, week=2, result='1-0')
-game17 = Game(white=2, black=5, tournament=1, week=2)
-game18 = Game(white=5, black=2, tournament=1, week=2, result='1-0')
-game19 = Game(white=6, black=11, tournament=1, week=2)
-game20 = Game(white=11, black=6, tournament=1, week=2)
-game21 = Game(white=8, black=1, tournament=1, week=2, result='1-0')
-game22 = Game(white=1, black=8, tournament=1, week=2)
-game23 = Game(white=9, black=10, tournament=1, week=2)
-game24 = Game(white=10, black=9, tournament=1, week=2)
-game25 = Game(white=12, black=7, tournament=1, week=3)
-game26 = Game(white=7, black=12, tournament=1, week=3, result='1-0')
-game27 = Game(white=3, black=4, tournament=1, week=3)
-game28 = Game(white=4, black=3, tournament=1, week=3)
-game29 = Game(white=2, black=11, tournament=1, week=3, result='0-1')
-game30 = Game(white=11, black=2, tournament=1, week=3)
-game31 = Game(white=5, black=6, tournament=1, week=3)
-game32 = Game(white=6, black=5, tournament=1, week=3)
-game33 = Game(white=8, black=10, tournament=1, week=3)
-game34 = Game(white=10, black=8, tournament=1, week=3)
-game35 = Game(white=1, black=9, tournament=1, week=3)
-game36 = Game(white=9, black=1, tournament=1, week=3)
+game1 = Game(white=12, black=9, tournament=1, week=1)
+game2 = Game(white=9, black=12, tournament=1, week=1)
+game3 = Game(white=6, black=7, tournament=1, week=1)
+game4 = Game(white=7, black=6, tournament=1, week=1)
+game5 = Game(white=2, black=10, tournament=1, week=1)
+game6 = Game(white=10, black=2, tournament=1, week=1)
+game7 = Game(white=4, black=11, tournament=1, week=1)
+game8 = Game(white=11, black=4, tournament=1, week=1)
+game9 = Game(white=8, black=13, tournament=1, week=1)
+game10 = Game(white=13, black=8, tournament=1, week=1)
+game11 = Game(white=3, black=16, tournament=1, week=1)
+game12 = Game(white=16, black=3, tournament=1, week=1)
+game13 = Game(white=1, black=14, tournament=1, week=1)
+game14 = Game(white=14, black=1, tournament=1, week=1)
+game15 = Game(white=5, black=15, tournament=1, week=1)
+game16 = Game(white=15, black=5, tournament=1, week=1)
+game17 = Game(white=12, black=6, tournament=1, week=2)
+game18 = Game(white=6, black=12, tournament=1, week=2)
+game19 = Game(white=9, black=7, tournament=1, week=2)
+game20 = Game(white=7, black=9, tournament=1, week=2)
+game21 = Game(white=2, black=4, tournament=1, week=2)
+game22 = Game(white=4, black=2, tournament=1, week=2)
+game23 = Game(white=10, black=11, tournament=1, week=2)
+game24 = Game(white=11, black=10, tournament=1, week=2)
+game25 = Game(white=8, black=3, tournament=1, week=2)
+game26 = Game(white=3, black=8, tournament=1, week=2)
+game27 = Game(white=13, black=16, tournament=1, week=2)
+game28 = Game(white=16, black=13, tournament=1, week=2)
+game29 = Game(white=1, black=5, tournament=1, week=2)
+game30 = Game(white=5, black=1, tournament=1, week=2)
+game31 = Game(white=14, black=15, tournament=1, week=2)
+game32 = Game(white=15, black=14, tournament=1, week=2)
+game33 = Game(white=12, black=7, tournament=1, week=3)
+game34 = Game(white=7, black=12, tournament=1, week=3)
+game35 = Game(white=6, black=9, tournament=1, week=3)
+game36 = Game(white=9, black=6, tournament=1, week=3)
+game37 = Game(white=2, black=11, tournament=1, week=3)
+game38 = Game(white=11, black=2, tournament=1, week=3)
+game39 = Game(white=4, black=10, tournament=1, week=3)
+game40 = Game(white=10, black=4, tournament=1, week=3)
+game41 = Game(white=8, black=16, tournament=1, week=3)
+game42 = Game(white=16, black=8, tournament=1, week=3)
+game43 = Game(white=3, black=13, tournament=1, week=3)
+game44 = Game(white=13, black=3, tournament=1, week=3)
+game45 = Game(white=1, black=15, tournament=1, week=3)
+game46 = Game(white=15, black=1, tournament=1, week=3)
+game47 = Game(white=5, black=14, tournament=1, week=3)
+game48 = Game(white=14, black=5, tournament=1, week=3)
 
 db.session.add(game1)
 db.session.add(game2)
@@ -139,17 +167,31 @@ db.session.add(game33)
 db.session.add(game34)
 db.session.add(game35)
 db.session.add(game36)
+db.session.add(game37)
+db.session.add(game38)
+db.session.add(game39)
+db.session.add(game40)
+db.session.add(game41)
+db.session.add(game42)
+db.session.add(game43)
+db.session.add(game44)
+db.session.add(game45)
+db.session.add(game46)
+db.session.add(game47)
+db.session.add(game48)
 db.session.commit()
 
-players = [dba, zm, jr, jm, ad, eh, jd, pd, br, bhe, af, bh]
+players = [dba, zm, jr, jm, ad, eh, jd, pd, br, bhe, pn, pj, sr, jw, af, bh]
 seed = 1
 for player in players:
-    if seed in [1, 6, 7, 12]:
+    if seed in [1, 8, 9, 16]:
         pool = 'A'
-    elif seed in [2, 5, 8, 11]:
+    elif seed in [2, 7, 10, 15]:
         pool = 'B'
-    elif seed in [3, 4, 9, 10]:
+    elif seed in [3, 6, 11, 14]:
         pool = 'C'
+    elif seed in [4, 5, 12, 13]:
+        pool = 'D'
     player_tournament = PlayerTournament(player_id=player.id, tournament_id=1, seed=seed, pool=pool)
     db.session.add(player_tournament)
     seed += 1

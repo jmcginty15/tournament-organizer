@@ -56,7 +56,7 @@ def tournament(id):
 
     admin = False
     if session.get('admin'):
-        admin=True
+        admin = True
 
     return render_template('tournament.html', tournament=tournament, pools=pools, weeks=weeks, current_week=current_week, admin=admin)
 
@@ -135,8 +135,10 @@ def admin_page(id):
             games.append(DisplayGame(game_query, white, black))
 
         update_ids = [player.id for player in players]
-        player_queries = PlayerTournament.query.filter(PlayerTournament.player_id.in_(update_ids)).filter_by(tournament_id=id).all()
-        players = [DisplayPlayer(player_query) for player_query in player_queries]
+        player_queries = PlayerTournament.query.filter(
+            PlayerTournament.player_id.in_(update_ids)).filter_by(tournament_id=id).all()
+        players = [DisplayPlayer(player_query)
+                   for player_query in player_queries]
 
         return render_template('admin.html', players=players, games=games, tournament_id=id)
     else:
@@ -184,12 +186,15 @@ def update_game(id, result):
 def update_player(player_id, tournament_id, new_score):
     admin = session.get('admin')
     if admin:
-        player_rel = PlayerTournament.query.filter_by(player_id=player_id).filter_by(tournament_id=tournament_id).first()
+        player_rel = PlayerTournament.query.filter_by(
+            player_id=player_id).filter_by(tournament_id=tournament_id).first()
         player_rel.score = new_score / 100
         player = Player.query.get_or_404(player_id)
+        user = lichess.api.user(player.username)
+        player.rating = user['perfs']['classical']['rating']
         player.needs_update = False
         db.session.commit()
-        return jsonify({'status': 'success'})
+        return jsonify({'status': 'success', 'new_rating': player.rating})
     else:
         flash('Must be logged in as admin to do that.')
         return redirect('/')

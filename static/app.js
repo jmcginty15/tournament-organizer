@@ -314,10 +314,12 @@ async function updatePlayer() {
 
     const res = await axios.post(`${BASE_URL}/players/${playerId}/${tournamentId}/${score}`);
     const status = res.data.status;
+    console.log(res.data.new_rating);
 
     if (status === 'success') {
         $scoreForm.hide();
         $(`#score-container-${playerId}`).text(scoreStr);
+        $(`#rating-container-${playerId}`).text(res.data.new_rating);
     } else {
         console.log('try again lol');
     }

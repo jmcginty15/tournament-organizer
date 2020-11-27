@@ -4,16 +4,19 @@ def sort_pools(player_list):
     pool_A = []
     pool_B = []
     pool_C = []
+    pool_D = []
 
     for player in player_list:
-        if player.seed in [1, 6, 7, 12]:
+        if player.seed in [1, 8, 9, 16]:
             pool_A.append(player)
-        elif player.seed in [2, 5, 8, 11]:
+        elif player.seed in [2, 7, 10, 15]:
             pool_B.append(player)
-        elif player.seed in [3, 4, 9, 10]:
+        elif player.seed in [3, 6, 11, 14]:
             pool_C.append(player)
+        elif player.seed in [4, 5, 12, 13]:
+            pool_D.append(player)
     
-    return [Pool('A', pool_A), Pool('B', pool_B), Pool('C', pool_C)]
+    return [Pool('A', pool_A), Pool('B', pool_B), Pool('C', pool_C), Pool('D', pool_D)]
 
 
 def sort_weeks(game_list):

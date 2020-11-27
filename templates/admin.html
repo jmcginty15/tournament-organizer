@@ -9,6 +9,7 @@
     {% for player in players %}
     <li class="list-group-item">{{ player.username }}<br>
         Current Score: <span id="score-container-{{ player.id }}">{{ player.score }}</span><br>
+        Current Rating: <span id="rating-container-{{ player.id }}">{{ player.rating }}</span><br>
         <button type="button" id="score-{{ player.id }}" class="btn btn-outline-secondary score-button">Update Score</button>
     </li>
     {% endfor %}
@@ -24,7 +25,7 @@
                         class="text-muted">{{ game.white.rating }}</small></h6>
             </div>
             <div class="col-2">
-                <a href="{{ game.url }}" class="btn btn-outline-secondary schedule-button" target="_blank">Game URL</a>
+                <a href="{{ game.url }}" class="btn btn-outline-secondary url-button" target="_blank">Game URL</a>
             </div>
         </div>
         <div class="row">

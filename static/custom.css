@@ -73,7 +73,7 @@ h3 {
     background-color: black;
 }
 
-.schedule-button, .report-button, .cancel-button, .result-button, .score-button {
+.schedule-button, .report-button, .cancel-button, .result-button, .score-button, .rating-button, .url-button {
     padding: 3px !important;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
 }

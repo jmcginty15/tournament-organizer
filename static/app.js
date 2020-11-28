@@ -18,8 +18,8 @@ const $resultButton = $('.result-button');
 const $scoreForm = $('#score-form');
 const $scoreButton = $('.score-button');
 
-const BASE_URL = 'http://127.0.0.1:5000';
-// const BASE_URL = 'yeet';
+// const BASE_URL = 'http://127.0.0.1:5000';
+const BASE_URL = 'https://chess-tournament-organizer.herokuapp.com';
 
 if (window.innerWidth <= 550) {
     $poolGrids.addClass('col-12');

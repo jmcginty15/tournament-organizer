@@ -117,61 +117,62 @@ $scoreForm.on('click', function (evt) {
     }
 });
 
-$scheduleGameButton.on('click', async function (evt) {
+$('.list-group-item').on('click', async function (evt) {
     const $target = $(evt.target);
-    const targetId = $target.attr('id');
-    const gameId = parseInt(targetId.slice(targetId.indexOf('-') + 1));
+    if ($target.hasClass('schedule-button')) {
+        const targetId = $target.attr('id');
+        const gameId = parseInt(targetId.slice(targetId.indexOf('-') + 1));
 
-    res = await axios.get(`${BASE_URL}/games/${gameId}`);
-    const game = res.data;
+        res = await axios.get(`${BASE_URL}/games/${gameId}`);
+        const game = res.data;
 
-    let scheduleBlock = '';
-    if (game.schedule) {
-        const schedule = game.schedule;
-        const day = schedule.slice(0, 3);
-        const date = schedule.slice(5, 7);
-        const month = schedule.slice(8, 11);
-        const hourUTC = schedule.slice(17, 19);
-        const minuteUTC = schedule.slice(20, 22);
+        let scheduleBlock = '';
+        if (game.schedule) {
+            const schedule = game.schedule;
+            const day = schedule.slice(0, 3);
+            const date = schedule.slice(5, 7);
+            const month = schedule.slice(8, 11);
+            const hourUTC = schedule.slice(17, 19);
+            const minuteUTC = schedule.slice(20, 22);
 
-        const here = new Date();
-        const offset = here.getTimezoneOffset();
+            const here = new Date();
+            const offset = here.getTimezoneOffset();
 
-        let minutes = parseInt(hourUTC) * 60 + parseInt(minuteUTC) - offset;
+            let minutes = parseInt(hourUTC) * 60 + parseInt(minuteUTC) - offset;
 
-        let hourLocal = Math.floor(minutes / 60);
-        const minuteLocal = minutes - (hourLocal * 60);
-        let label = 'AM';
+            let hourLocal = Math.floor(minutes / 60);
+            const minuteLocal = minutes - (hourLocal * 60);
+            let label = 'AM';
 
-        if (hourLocal === 0) {
-            hourLocal = 12;
-        } else if (hourLocal === 12) {
-            label = 'PM';
-        } else if (hourLocal > 12) {
-            hourLocal -= 12;
-            label = 'PM';
-        }
+            if (hourLocal === 0) {
+                hourLocal = 12;
+            } else if (hourLocal === 12) {
+                label = 'PM';
+            } else if (hourLocal > 12) {
+                hourLocal -= 12;
+                label = 'PM';
+            }
 
-        if (hourLocal.toString().length === 1) {
-            hourLocal = `0${hourLocal}`;
-        }
-        if (minuteLocal.toString().length === 1) {
-            minuteLocal = `0${minuteLocal}`;
-        }
+            if (hourLocal.toString().length === 1) {
+                hourLocal = `0${hourLocal}`;
+            }
+            if (minuteLocal.toString().length === 1) {
+                minuteLocal = `0${minuteLocal}`;
+            }
 
-        scheduleBlock = `<div class="row">
+            scheduleBlock = `<div class="row">
                 <div class="col-12">
                     <small class="text-muted">${day} ${month} ${date}, ${hourLocal}:${minuteLocal} ${label}</small>
                 </div>
             </div>`;
-    }
+        }
 
-    let buttonLabel = 'Schedule';
-    if (game.schedule) {
-        buttonLabel = 'Reschedule';
-    }
+        let buttonLabel = 'Schedule';
+        if (game.schedule) {
+            buttonLabel = 'Reschedule';
+        }
 
-    const html = `<h3>Schedule Game</h3>
+        const html = `<h3>Schedule Game</h3>
         <div class="list-container">
             <ul class="list-group">
                 <li class="list-group-item">
@@ -205,8 +206,9 @@ $scheduleGameButton.on('click', async function (evt) {
             </ul>
         </div>`;
 
-    $schedulerForm.html(html);
-    $schedulerForm.show();
+        $schedulerForm.html(html);
+        $schedulerForm.show();
+    }
 });
 
 $reportGameButton.on('click', async function (evt) {
@@ -232,7 +234,7 @@ $reportGameButton.on('click', async function (evt) {
                 </li>
             </ul>
         </div>`;
-    
+
     $reportForm.html(html);
     $reportForm.show();
 });
@@ -252,7 +254,7 @@ $resultButton.on('click', function (evt) {
                 <button type="button" id="result-cancel" class="btn btn-outline-danger cancel-button">Cancel</button>
             </div>
         </form>`;
-    
+
     $resultForm.html(html);
     $resultForm.show();
 });
@@ -300,7 +302,7 @@ $scoreButton.on('click', function (evt) {
                 <button type="button" id="score-cancel" class="btn btn-outline-danger cancel-button">Cancel</button>
             </div>
         </form>`;
-    
+
     $scoreForm.html(html);
     $scoreForm.show();
 });

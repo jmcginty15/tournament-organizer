@@ -18,8 +18,8 @@ const $resultButton = $('.result-button');
 const $scoreForm = $('#score-form');
 const $scoreButton = $('.score-button');
 
-// const BASE_URL = 'http://127.0.0.1:5000';
-const BASE_URL = 'https://chess-tournament-organizer.herokuapp.com';
+const BASE_URL = 'http://127.0.0.1:5000';
+// const BASE_URL = 'https://chess-tournament-organizer.herokuapp.com';
 
 if (window.innerWidth <= 550) {
     $poolGrids.addClass('col-12');
@@ -117,62 +117,61 @@ $scoreForm.on('click', function (evt) {
     }
 });
 
-$('.list-group-item').on('click', async function (evt) {
+$scheduleGameButton.on('click', async function (evt) {
     const $target = $(evt.target);
-    if ($target.hasClass('schedule-button')) {
-        const targetId = $target.attr('id');
-        const gameId = parseInt(targetId.slice(targetId.indexOf('-') + 1));
+    const targetId = $target.attr('id');
+    const gameId = parseInt(targetId.slice(targetId.indexOf('-') + 1));
 
-        res = await axios.get(`${BASE_URL}/games/${gameId}`);
-        const game = res.data;
+    res = await axios.get(`${BASE_URL}/games/${gameId}`);
+    const game = res.data;
 
-        let scheduleBlock = '';
-        if (game.schedule) {
-            const schedule = game.schedule;
-            const day = schedule.slice(0, 3);
-            const date = schedule.slice(5, 7);
-            const month = schedule.slice(8, 11);
-            const hourUTC = schedule.slice(17, 19);
-            const minuteUTC = schedule.slice(20, 22);
+    let scheduleBlock = '';
+    if (game.schedule) {
+        const schedule = game.schedule;
+        const day = schedule.slice(0, 3);
+        const date = schedule.slice(5, 7);
+        const month = schedule.slice(8, 11);
+        const hourUTC = schedule.slice(17, 19);
+        const minuteUTC = schedule.slice(20, 22);
 
-            const here = new Date();
-            const offset = here.getTimezoneOffset();
+        const here = new Date();
+        const offset = here.getTimezoneOffset();
 
-            let minutes = parseInt(hourUTC) * 60 + parseInt(minuteUTC) - offset;
+        let minutes = parseInt(hourUTC) * 60 + parseInt(minuteUTC) - offset;
 
-            let hourLocal = Math.floor(minutes / 60);
-            const minuteLocal = minutes - (hourLocal * 60);
-            let label = 'AM';
+        let hourLocal = Math.floor(minutes / 60);
+        let minuteLocal = minutes - (hourLocal * 60);
+        let label = 'AM';
 
-            if (hourLocal === 0) {
-                hourLocal = 12;
-            } else if (hourLocal === 12) {
-                label = 'PM';
-            } else if (hourLocal > 12) {
-                hourLocal -= 12;
-                label = 'PM';
-            }
+        if (hourLocal === 0) {
+            hourLocal = 12;
+        } else if (hourLocal === 12) {
+            label = 'PM';
+        } else if (hourLocal > 12) {
+            hourLocal -= 12;
+            label = 'PM';
+        }
 
-            if (hourLocal.toString().length === 1) {
-                hourLocal = `0${hourLocal}`;
-            }
-            if (minuteLocal.toString().length === 1) {
-                minuteLocal = `0${minuteLocal}`;
-            }
+        if (hourLocal.toString().length === 1) {
+            hourLocal = `0${hourLocal}`;
+        }
+        if (minuteLocal.toString().length === 1) {
+            minuteLocal = `0${minuteLocal}`;
+        }
 
-            scheduleBlock = `<div class="row">
+        scheduleBlock = `<div class="row">
                 <div class="col-12">
                     <small class="text-muted">${day} ${month} ${date}, ${hourLocal}:${minuteLocal} ${label}</small>
                 </div>
             </div>`;
-        }
+    }
 
-        let buttonLabel = 'Schedule';
-        if (game.schedule) {
-            buttonLabel = 'Reschedule';
-        }
+    let buttonLabel = 'Schedule';
+    if (game.schedule) {
+        buttonLabel = 'Reschedule';
+    }
 
-        const html = `<h3>Schedule Game</h3>
+    const html = `<h3>Schedule Game</h3>
         <div class="list-container">
             <ul class="list-group">
                 <li class="list-group-item">
@@ -194,8 +193,97 @@ $('.list-group-item').on('click', async function (evt) {
                 </li>
                 <li class="list-group-item">
                     <form id="schedule-form" method="POST" action="/games/${game.id}/schedule">
-                        <label for="date-time">Choose a date and time:</label>
-                        <input type="datetime-local" id="date-time" name="date-time" required><br>
+                        <label for="date">Choose a date and time:</label>
+                        <select name="date" required>
+                            <option value="11-29">Sun Nov 29</option>
+                            <option value="11-30">Mon Nov 30</option>
+                            <option value="12-01">Tue Dec 01</option>
+                            <option value="12-02">Wed Dec 02</option>
+                            <option value="12-03">Thu Dec 03</option>
+                            <option value="12-04">Fri Dec 04</option>
+                            <option value="12-05">Sat Dec 05</option>
+                            <option value="12-06">Sun Dec 06</option>
+                        </select>,
+                        <select name="hour" required>
+                            <option value="01">01</option>
+                            <option value="02">02</option>
+                            <option value="03">03</option>
+                            <option value="04">04</option>
+                            <option value="05">05</option>
+                            <option value="06">06</option>
+                            <option value="07">07</option>
+                            <option value="08">08</option>
+                            <option value="09">09</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="00">12</option>
+                        </select> :
+                        <select name="minute" required>
+                            <option value="00">00</option>
+                            <option value="01">01</option>
+                            <option value="02">02</option>
+                            <option value="03">03</option>
+                            <option value="04">04</option>
+                            <option value="05">05</option>
+                            <option value="06">06</option>
+                            <option value="07">07</option>
+                            <option value="08">08</option>
+                            <option value="09">09</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
+                            <option value="31">31</option>
+                            <option value="32">32</option>
+                            <option value="33">33</option>
+                            <option value="34">34</option>
+                            <option value="35">35</option>
+                            <option value="36">36</option>
+                            <option value="37">37</option>
+                            <option value="38">38</option>
+                            <option value="39">39</option>
+                            <option value="40">40</option>
+                            <option value="41">41</option>
+                            <option value="42">42</option>
+                            <option value="43">43</option>
+                            <option value="44">44</option>
+                            <option value="45">45</option>
+                            <option value="46">46</option>
+                            <option value="47">47</option>
+                            <option value="48">48</option>
+                            <option value="49">49</option>
+                            <option value="50">50</option>
+                            <option value="51">51</option>
+                            <option value="52">52</option>
+                            <option value="53">53</option>
+                            <option value="54">54</option>
+                            <option value="55">55</option>
+                            <option value="56">56</option>
+                            <option value="57">57</option>
+                            <option value="58">58</option>
+                            <option value="59">59</option>
+                        </select>
+                        <select name="am-pm" required>
+                            <option value="AM">AM</option>
+                            <option value="PM">PM</option>
+                        </select><br>
                         <div class="schedule-button-container">
                             <button type="submit"
                                 class="btn btn-outline-secondary schedule-button">${buttonLabel}</button>
@@ -206,9 +294,8 @@ $('.list-group-item').on('click', async function (evt) {
             </ul>
         </div>`;
 
-        $schedulerForm.html(html);
-        $schedulerForm.show();
-    }
+    $schedulerForm.html(html);
+    $schedulerForm.show();
 });
 
 $reportGameButton.on('click', async function (evt) {
@@ -316,7 +403,6 @@ async function updatePlayer() {
 
     const res = await axios.post(`${BASE_URL}/players/${playerId}/${tournamentId}/${score}`);
     const status = res.data.status;
-    console.log(res.data.new_rating);
 
     if (status === 'success') {
         $scoreForm.hide();

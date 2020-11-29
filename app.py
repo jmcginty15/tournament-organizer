@@ -96,7 +96,13 @@ def game(id):
 @app.route('/games/<int:id>/schedule', methods=['POST'])
 def schedule_game(id):
     game = Game.query.get_or_404(id)
-    schedule = request.form['date-time']
+    day = request.form['date']
+    hour = request.form['hour']
+    minute = request.form['minute']
+    am_pm = request.form['am-pm']
+    if am_pm == 'PM':
+        hour = f'{int(hour) + 12}'
+    schedule = f'2020-{day}T{hour}:{minute}'
     label = 'scheduled'
     if game.schedule:
         label = 'rescheduled'

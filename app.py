@@ -53,7 +53,7 @@ def tournament(id):
     weeks = sort_weeks(games)
 
     current_week = weeks[tournament.current_week - 1]
-    current_week_ends = datetime.datetime(2020, 12, 13, 18, 0)
+    current_week_ends = datetime.datetime(2020, 12, 20, 18, 0)
 
     admin = False
     if session.get('admin'):

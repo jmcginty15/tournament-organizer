@@ -20,12 +20,15 @@
                 <h3>{{ pool.name }}</h3>
                 <ul class="list-group">
                     {% for player in pool.standings %}
-                    <li id="player-{{ player.seed }}" class="list-group-item">
+                    <li id="player-{{ player.seed }}"
+                        class="list-group-item{% if player.advances %} advances{% endif %}">
                         <div class="row">
                             <div class="col-10">
                                 <h6><small class="text-muted">{{ player.seed }}</small> {{ player.first_name }}
-                                    {{ player.last_name }} <small class="text-muted"><em>{{ player.rating }}</em></small></h6>
-                                <a href="{{ player.url }}" target="_blank">{{ player.username }}</a>
+                                    {{ player.last_name }} <small
+                                        class="text-muted"><em>{{ player.rating }}</em>{% if player.advances %} -
+                                        <b>advances to playoff</b>{% endif %}</small></h6><a href="{{ player.url }}"
+                                    target="_blank">{{ player.username }}</a>
                             </div>
                             <div class="col-2 score-box">{{ player.score }}</div>
                         </div>
@@ -47,8 +50,7 @@
                         {% if game.result %}
                         <small class="text-muted">Game complete</small>
                         {% else %}
-                        <small
-                            class="text-muted">{% if game.schedule %}{{ game.schedule.strftime('%a %b %d, %I:%M %p') }}{% else %}Schedule
+                        <small class="text-muted">{% if game.schedule %}{{ game.schedule.strftime('%a %b %d, %I:%M %p') }}{% else %}Schedule
                             TBD{% endif %}</small>
                         {% endif %}
                     </div>
@@ -109,8 +111,7 @@
                                 {% if game.result %}
                                 <small class="text-muted">Game complete</small>
                                 {% else %}
-                                <small
-                                    class="text-muted">{% if game.schedule %}{{ game.schedule.strftime('%a %b %d, %I:%M %p') }}{% else %}Schedule
+                                <small class="text-muted">{% if game.schedule %}{{ game.schedule.strftime('%a %b %d, %I:%M %p') }}{% else %}Schedule
                                     TBD{% endif %}</small>
                                 {% endif %}
                             </div>

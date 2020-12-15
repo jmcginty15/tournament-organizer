@@ -114,3 +114,8 @@ h3 {
 .advances {
     background-color: lightgrey;
 }
+
+#advance-info {
+    padding-top: 10px;
+    padding-left: 15px;
+}

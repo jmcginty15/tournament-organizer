@@ -33,7 +33,7 @@
                                         <em><b>x</b></em>{% endif %}</small></h6><a href="{{ player.url }}"
                                     target="_blank">{{ player.username }}</a>
                             </div>
-                            <div class="col-2 score-box">{{ player.score }}</div>
+                            <div class="col-2 score-box">{{ player.score|round(1) }}</div>
                         </div>
                     </li>
                     {% endfor %}

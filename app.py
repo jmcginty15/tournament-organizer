@@ -102,9 +102,12 @@ def schedule_game(id):
     hour = request.form['hour']
     minute = request.form['minute']
     am_pm = request.form['am-pm']
+    year = 2020
+    if day == '01':
+        year = 2021
     if am_pm == 'PM':
         hour = f'{int(hour) + 12}'
-    schedule = f'2020-{day}T{hour}:{minute}'
+    schedule = f'{year}-{day}T{hour}:{minute}'
     label = 'scheduled'
     if game.schedule:
         label = 'rescheduled'

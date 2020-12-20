@@ -230,14 +230,21 @@ $scheduleGameButton.on('click', async function (evt) {
                     <form id="schedule-form" method="POST" action="/games/${game.id}/schedule">
                         <label for="date">Choose a date and time:</label>
                         <select name="date" required>
-                            <option value="12-13">Sun Dec 13</option>
-                            <option value="12-14">Mon Dec 14</option>
-                            <option value="12-15">Tue Dec 15</option>
-                            <option value="12-16">Wed Dec 16</option>
-                            <option value="12-17">Thu Dec 17</option>
-                            <option value="12-18">Fri Dec 18</option>
-                            <option value="12-19">Sat Dec 19</option>
                             <option value="12-20">Sun Dec 20</option>
+                            <option value="12-21">Mon Dec 21</option>
+                            <option value="12-22">Tue Dec 22</option>
+                            <option value="12-23">Wed Dec 23</option>
+                            <option value="12-24">Thu Dec 24</option>
+                            <option value="12-25">Fri Dec 25</option>
+                            <option value="12-26">Sat Dec 26</option>
+                            <option value="12-27">Sun Dec 27</option>
+                            <option value="12-28">Mon Dec 28</option>
+                            <option value="12-29">Tue Dec 29</option>
+                            <option value="12-30">Wed Dec 30</option>
+                            <option value="12-31">Thu Dec 31</option>
+                            <option value="01-01">Fri Jan 01</option>
+                            <option value="01-02">Sat Jan 02</option>
+                            <option value="01-03">Sun Jan 03</option>
                         </select>,
                         <select name="hour" required>
                             <option value="01">01</option>

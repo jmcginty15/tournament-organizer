@@ -22,7 +22,16 @@ class DisplayPlayer():
 class Pool():
 
     def __init__(self, pool_letter, player_list):
-        self.name = f'Pool {pool_letter}'
+        if pool_letter in ['A', 'B', 'C', 'D']:
+            self.name = f'Pool {pool_letter}'
+        elif pool_letter == '1':
+            self.name = 'Semifinal 1'
+        elif pool_letter == '2':
+            self.name = 'Semifinal 2'
+        elif pool_letter == 'F':
+            self.name = 'First Place Match'
+        elif pool_letter == 'T':
+            self.name = 'Third Place Match'
         self.players = player_list
         self.standings = self.order_standings()
     
@@ -56,5 +65,10 @@ class DisplayGame():
 class Week():
 
     def __init__(self, week_number, game_list):
-        self.name = f'Week {week_number}'
+        if week_number < 4:
+            self.name = f'Week {week_number}'
+        elif week_number == 4:
+            self.name = 'Semifinals'
+        elif week_number == 5:
+            self.name = 'Finals'
         self.games = game_list

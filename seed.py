@@ -196,3 +196,33 @@ for player in players:
     db.session.add(player_tournament)
     seed += 1
 db.session.commit()
+
+dennis = PlayerTournament(player_id=dba.id, tournament_id=1, seed=1, pool='1')
+zach = PlayerTournament(player_id=zm.id, tournament_id=1, seed=2, pool='2')
+jason = PlayerTournament(player_id=jm.id, tournament_id=1, seed=4, pool='2')
+jake = PlayerTournament(player_id=jw.id, tournament_id=1, seed=14, pool='1')
+
+db.session.add(dennis)
+db.session.add(zach)
+db.session.add(jason)
+db.session.add(jake)
+db.session.commit()
+
+game49 = Game(white=dba.id, black=jw.id, tournament=1, week=4)
+game50 = Game(white=jw.id, black=dba.id, tournament=1, week=4)
+game51 = Game(white=dba.id, black=jw.id, tournament=1, week=4)
+game52 = Game(white=jw.id, black=dba.id, tournament=1, week=4)
+game53 = Game(white=zm.id, black=jm.id, tournament=1, week=4)
+game54 = Game(white=jm.id, black=zm.id, tournament=1, week=4)
+game55 = Game(white=zm.id, black=jm.id, tournament=1, week=4)
+game56 = Game(white=jm.id, black=zm.id, tournament=1, week=4)
+
+db.session.add(game49)
+db.session.add(game50)
+db.session.add(game51)
+db.session.add(game52)
+db.session.add(game53)
+db.session.add(game54)
+db.session.add(game55)
+db.session.add(game56)
+db.session.commit()

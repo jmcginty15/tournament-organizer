@@ -42,6 +42,8 @@ def tournament(id):
     player_rels = PlayerTournament.query.all()
     players = [DisplayPlayer(player_rel) for player_rel in player_rels]
     pools = sort_pools(players)
+    semifinals = pools[4:]
+    pools = pools[:4]
 
     game_queries = Game.query.filter_by(
         tournament=id).order_by(Game.schedule).all()
@@ -53,13 +55,13 @@ def tournament(id):
     weeks = sort_weeks(games)
 
     current_week = weeks[tournament.current_week - 1]
-    current_week_ends = datetime.datetime(2020, 12, 20, 18, 0)
+    current_week_ends = datetime.datetime(2021, 1, 3, 18, 0)
 
     admin = False
     if session.get('admin'):
         admin = True
 
-    return render_template('tournament.html', tournament=tournament, pools=pools, weeks=weeks, current_week=current_week, current_week_ends=current_week_ends, admin=admin)
+    return render_template('tournament.html', tournament=tournament, pools=pools, semifinals=semifinals, weeks=weeks, current_week=current_week, current_week_ends=current_week_ends, admin=admin)
 
 
 @app.route('/games/<int:id>')
@@ -143,7 +145,7 @@ def admin_page(id):
 
         update_ids = [player.id for player in players]
         player_queries = PlayerTournament.query.filter(
-            PlayerTournament.player_id.in_(update_ids)).filter_by(tournament_id=id).all()
+            PlayerTournament.player_id.in_(update_ids)).filter_by(tournament_id=id).filter((PlayerTournament.pool == '1') | (PlayerTournament.pool == '2')).all()
         players = [DisplayPlayer(player_query)
                    for player_query in player_queries]
 
@@ -194,7 +196,7 @@ def update_player(player_id, tournament_id, new_score):
     admin = session.get('admin')
     if admin:
         player_rel = PlayerTournament.query.filter_by(
-            player_id=player_id).filter_by(tournament_id=tournament_id).first()
+            player_id=player_id).filter_by(tournament_id=tournament_id).filter((PlayerTournament.pool == '1') | (PlayerTournament.pool == '2')).first()
         player_rel.score = new_score / 100
         player = Player.query.get_or_404(player_id)
         user = lichess.api.user(player.username)

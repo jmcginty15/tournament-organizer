@@ -1,7 +1,9 @@
 const $poolGrids = $('.pool-grid');
 const $scheduleGrids = $('.schedule-grid');
 const $standingsButton = $('#standings-nav');
+const $semifinalsButton = $('#semifinals-nav');
 const $standingsDisplay = $('#standings');
+const $semifinalsDisplay = $('#semifinals');
 const $thisWeekButton = $('#this-week-nav');
 const $thisWeekDisplay = $('#this-week');
 const $scheduleButton = $('#schedule-nav');
@@ -17,6 +19,8 @@ const $resultForm = $('#result-form');
 const $resultButton = $('.result-button');
 const $scoreForm = $('#score-form');
 const $scoreButton = $('.score-button');
+const $widthSetter = $('#width-setter');
+const $playoffRows = $('.playoff-row');
 
 // const BASE_URL = 'http://127.0.0.1:5000';
 const BASE_URL = 'https://chess-tournament-organizer.herokuapp.com';
@@ -28,35 +32,63 @@ if (window.innerWidth <= 550) {
     $scheduleGrids.addClass('col-12');
     $scheduleGrids.removeClass('col-6');
 }
+$playoffRows.width($widthSetter.width());
+$standingsDisplay.hide();
 
 $standingsButton.on('click', function () {
     $('.flash-message').hide();
 
     $standingsDisplay.show();
+    $semifinalsDisplay.hide();
     $thisWeekDisplay.hide();
     $scheduleDisplay.hide();
 
     $standingsButton.addClass('active');
+    $semifinalsButton.removeClass('active');
     $thisWeekButton.removeClass('active');
     $scheduleButton.removeClass('active');
 
     $standingsButton.removeClass('inactive');
+    $semifinalsButton.addClass('inactive');
     $thisWeekButton.addClass('inactive');
     $scheduleButton.addClass('inactive');
+});
+
+$semifinalsButton.on('click', function () {
+    $('.flash-message').hide();
+
+    $standingsDisplay.hide();
+    $semifinalsDisplay.show();
+    $thisWeekDisplay.hide();
+    $scheduleDisplay.hide();
+
+    $standingsButton.removeClass('active');
+    $semifinalsButton.addClass('active');
+    $thisWeekButton.removeClass('active');
+    $scheduleButton.removeClass('active');
+
+    $standingsButton.addClass('inactive');
+    $semifinalsButton.removeClass('inactive');
+    $thisWeekButton.addClass('inactive');
+    $scheduleButton.addClass('inactive');
+
 });
 
 $thisWeekButton.on('click', function () {
     $('.flash-message').hide();
 
     $standingsDisplay.hide();
+    $semifinalsDisplay.hide();
     $thisWeekDisplay.show();
     $scheduleDisplay.hide();
 
     $standingsButton.removeClass('active');
+    $semifinalsButton.removeClass('active');
     $thisWeekButton.addClass('active');
     $scheduleButton.removeClass('active');
 
     $standingsButton.addClass('inactive');
+    $semifinalsButton.addClass('inactive');
     $thisWeekButton.removeClass('inactive');
     $scheduleButton.addClass('inactive');
 });
@@ -65,14 +97,17 @@ $scheduleButton.on('click', function () {
     $('.flash-message').hide();
 
     $standingsDisplay.hide();
+    $semifinalsDisplay.hide();
     $thisWeekDisplay.hide();
     $scheduleDisplay.show();
 
     $standingsButton.removeClass('active');
+    $semifinalsButton.removeClass('active');
     $thisWeekButton.removeClass('active');
     $scheduleButton.addClass('active');
 
     $standingsButton.addClass('inactive');
+    $semifinalsButton.addClass('inactive');
     $thisWeekButton.addClass('inactive');
     $scheduleButton.removeClass('inactive');
 });

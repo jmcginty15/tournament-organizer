@@ -81,7 +81,7 @@ class PlayerTournament(db.Model):
     tournament_id = db.Column(
         db.Integer, db.ForeignKey('Tournaments.id'), nullable=False)
     seed = db.Column(db.Integer)
-    pool = db.Column(db.String(1))
+    pool = db.Column(db.String(2))
     score = db.Column(db.Float, default=0)
     advances = db.Column(db.Boolean, default=False)
     player = db.relationship('Player')

@@ -9,7 +9,8 @@
     <p class="alert-success flash-message">{{ message }}</p>
     {% endfor %}
     <ul id="nav-bar" class="nav nav-tabs">
-        <li class="nav-item"><a id="standings-nav" class="nav-link active">Pool Standings</a></li>
+        <li class="nav-item"><a id="standings-nav" class="nav-link">Pool Standings</a></li>
+        <li class="nav-item"><a id="semifinals-nav" class="nav-link active">Semifinals</a></li>
         <li class="nav-item"><a id="this-week-nav" class="nav-link">This Week</a></li>
         <li class="nav-item"><a id="schedule-nav" class="nav-link">Full Schedule</a></li>
     </ul>
@@ -17,7 +18,7 @@
         <div id="advance-info" class="row">
             <h6><small class="text-muted"><em><b>x</b> - advances to semifinals</em></small></h6>
         </div>
-        <div class="row">
+        <div id="width-setter" class="row">
             {% for pool in pools %}
             <div class="col-6 pool-grid">
                 <h3>{{ pool.name }}</h3>
@@ -42,7 +43,36 @@
             {% endfor %}
         </div>
     </div>
-    <div id="this-week">
+    <div id="semifinals" class="container">
+        <!-- <div id="advance-info-semifinals" class="row">
+            <h6><small class="text-muted"><em><b>x</b> - advances to semifinals</em></small></h6>
+        </div> -->
+        <div class="row playoff-row">
+            {% for pool in semifinals %}
+            <div class="col-6 pool-grid">
+                <h3>{{ pool.name }}</h3>
+                <ul class="list-group">
+                    {% for player in pool.standings %}
+                    <li id="player-{{ player.seed }}-s"
+                        class="list-group-item{% if player.advances %} advances{% endif %}">
+                        <div class="row">
+                            <div class="col-10">
+                                <h6><small class="text-muted">{{ player.seed }}</small> {{ player.first_name }}
+                                    {{ player.last_name }} <small
+                                        class="text-muted"><em>{{ player.rating }}</em>{% if player.advances %} -
+                                        <em><b>x</b></em>{% endif %}</small></h6><a href="{{ player.url }}"
+                                    target="_blank">{{ player.username }}</a>
+                            </div>
+                            <div class="col-2 score-box">{{ player.score|round(1) }}</div>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div id="this-week" class="container">
         <h3>{{ current_week.name }}</h3>
         <p id="week-end-date" class="text-muted"><em>Ends {{ current_week_ends.strftime('%a %b %d, %I:%M %p') }}</em></p>
         <ul class="list-group">

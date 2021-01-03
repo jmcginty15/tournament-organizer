@@ -55,7 +55,7 @@ def tournament(id):
     weeks = sort_weeks(games)
 
     current_week = weeks[tournament.current_week - 1]
-    current_week_ends = datetime.datetime(2021, 1, 3, 18, 0)
+    current_week_ends = datetime.datetime(2021, 1, 10, 18, 0)
 
     admin = False
     if session.get('admin'):
@@ -102,7 +102,7 @@ def schedule_game(id):
     hour = request.form['hour']
     minute = request.form['minute']
     am_pm = request.form['am-pm']
-    year = 2020
+    year = 2021
     if day == '01':
         year = 2021
     if am_pm == 'PM':

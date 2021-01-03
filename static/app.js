@@ -245,6 +245,13 @@ $scheduleGameButton.on('click', async function (evt) {
                             <option value="01-01">Fri Jan 01</option>
                             <option value="01-02">Sat Jan 02</option>
                             <option value="01-03">Sun Jan 03</option>
+                            <option value="01-04">Mon Jan 04</option>
+                            <option value="01-05">Tue Jan 05</option>
+                            <option value="01-06">Wed Jan 06</option>
+                            <option value="01-07">Thu Jan 07</option>
+                            <option value="01-08">Fri Jan 08</option>
+                            <option value="01-09">Sat Jan 09</option>
+                            <option value="01-10">Sun Jan 10</option>
                         </select>,
                         <select name="hour" required>
                             <option value="01">01</option>

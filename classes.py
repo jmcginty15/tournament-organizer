@@ -1,5 +1,6 @@
 import lichess.api
 
+
 class DisplayPlayer():
 
     def __init__(self, player_rel):
@@ -34,7 +35,7 @@ class Pool():
             self.name = 'Third Place Match'
         self.players = player_list
         self.standings = self.order_standings()
-    
+
     def order_standings(self):
         players = self.players
         ordered_players = [players[0]]

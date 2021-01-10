@@ -22,7 +22,7 @@ h3 {
     margin-left: 5px;
 }
 
-#standings, #semifinals, #this-week, #schedule {
+#standings, #semifinals, #finals, #this-week, #schedule {
     background-color: white;
     border: 1px solid rgba(0, 0, 0, 0.125);
     border-radius: 0.25rem;
@@ -56,7 +56,7 @@ h3 {
     font-weight: bold;
 }
 
-#this-week, #schedule {
+#this-week, #schedule, #semifinals {
     display: none;
 }
 

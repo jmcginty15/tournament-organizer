@@ -42,7 +42,8 @@ def tournament(id):
     player_rels = PlayerTournament.query.all()
     players = [DisplayPlayer(player_rel) for player_rel in player_rels]
     pools = sort_pools(players)
-    semifinals = pools[4:]
+    finals = pools[6:]
+    semifinals = pools[4:6]
     pools = pools[:4]
 
     game_queries = Game.query.filter_by(
@@ -55,13 +56,13 @@ def tournament(id):
     weeks = sort_weeks(games)
 
     current_week = weeks[tournament.current_week - 1]
-    current_week_ends = datetime.datetime(2021, 1, 10, 18, 0)
+    current_week_ends = datetime.datetime(2021, 1, 24, 18, 0)
 
     admin = False
     if session.get('admin'):
         admin = True
 
-    return render_template('tournament.html', tournament=tournament, pools=pools, semifinals=semifinals, weeks=weeks, current_week=current_week, current_week_ends=current_week_ends, admin=admin)
+    return render_template('tournament.html', tournament=tournament, pools=pools, finals=finals, semifinals=semifinals, weeks=weeks, current_week=current_week, current_week_ends=current_week_ends, admin=admin)
 
 
 @app.route('/games/<int:id>')

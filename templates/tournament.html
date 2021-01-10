@@ -10,7 +10,8 @@
     {% endfor %}
     <ul id="nav-bar" class="nav nav-tabs">
         <li class="nav-item"><a id="standings-nav" class="nav-link">Pool Standings</a></li>
-        <li class="nav-item"><a id="semifinals-nav" class="nav-link active">Semifinals</a></li>
+        <li class="nav-item"><a id="semifinals-nav" class="nav-link">Semifinals</a></li>
+        <li class="nav-item"><a id="finals-nav" class="nav-link active">Finals</a></li>
         <li class="nav-item"><a id="this-week-nav" class="nav-link">This Week</a></li>
         <li class="nav-item"><a id="schedule-nav" class="nav-link">Full Schedule</a></li>
     </ul>
@@ -49,6 +50,35 @@
         </div>
         <div class="row playoff-row">
             {% for pool in semifinals %}
+            <div class="col-6 pool-grid">
+                <h3>{{ pool.name }}</h3>
+                <ul class="list-group">
+                    {% for player in pool.standings %}
+                    <li id="player-{{ player.seed }}-s"
+                        class="list-group-item{% if player.advances %} advances{% endif %}">
+                        <div class="row">
+                            <div class="col-10">
+                                <h6><small class="text-muted">{{ player.seed }}</small> {{ player.first_name }}
+                                    {{ player.last_name }} <small
+                                        class="text-muted"><em>{{ player.rating }}</em>{% if player.advances %} -
+                                        <em><b>x</b></em>{% endif %}</small></h6><a href="{{ player.url }}"
+                                    target="_blank">{{ player.username }}</a>
+                            </div>
+                            <div class="col-2 score-box">{{ player.score|round(1) }}</div>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div id="finals" class="container">
+        <!-- <div id="advance-info-finals" class="row">
+            <h6><small class="text-muted"><em><b>x</b> - advances to championship match</em></small></h6>
+        </div> -->
+        <div class="row playoff-row">
+            {% for pool in finals %}
             <div class="col-6 pool-grid">
                 <h3>{{ pool.name }}</h3>
                 <ul class="list-group">

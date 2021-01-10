@@ -21,9 +21,9 @@ def sort_pools(player_list):
             pool_D.append(player)
     
     for player in player_list[16:]:
-        if player.pool == 'S1':
+        if player.pool == '1':
             semifinal_1.append(player)
-        elif player.pool == 'S2':
+        elif player.pool == '2':
             semifinal_2.append(player)
         elif player.pool == 'F':
             first_place_match.append(player)

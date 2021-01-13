@@ -200,7 +200,7 @@ def update_player(player_id, tournament_id, new_score):
     admin = session.get('admin')
     if admin:
         player_rel = PlayerTournament.query.filter_by(
-            player_id=player_id).filter_by(tournament_id=tournament_id).filter((PlayerTournament.pool == '1') | (PlayerTournament.pool == '2')).first()
+            player_id=player_id).filter_by(tournament_id=tournament_id).filter((PlayerTournament.pool == 'F') | (PlayerTournament.pool == 'T')).first()
         player_rel.score = new_score / 100
         player = Player.query.get_or_404(player_id)
         user = lichess.api.user(player.username)

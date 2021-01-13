@@ -149,7 +149,7 @@ def admin_page(id):
 
         update_ids = [player.id for player in players]
         player_queries = PlayerTournament.query.filter(
-            PlayerTournament.player_id.in_(update_ids)).filter_by(tournament_id=id).filter((PlayerTournament.pool == '1') | (PlayerTournament.pool == '2')).all()
+            PlayerTournament.player_id.in_(update_ids)).filter_by(tournament_id=id).filter((PlayerTournament.pool == 'F') | (PlayerTournament.pool == 'T')).all()
         players = [DisplayPlayer(player_query)
                    for player_query in player_queries]
 

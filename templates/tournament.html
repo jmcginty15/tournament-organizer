@@ -20,16 +20,16 @@
         <h3>Final Placings</h3>
         <ul class="list-group">
             {% for player in placers %}
-            <li id="player-{{ player.seed }}-s" class="list-group-item  {% if player.place == '1st' %}first{% elif player.place == '2nd' %}second{% elif player.place == '3rd' %}third{% endif %}">
+            <li id="player-{{ player.seed }}-s"
+                class="list-group-item  {% if player.place == '1st' %}first{% elif player.place == '2nd' %}second{% elif player.place == '3rd' %}third{% endif %}">
                 <div class="row">
                     <div class="col-3 place">
                         {{ player.place }} place
                     </div>
                     <div class="col-7">
                         <h6><small class="text-muted">{{ player.seed }}</small> {{ player.first_name }}
-                            {{ player.last_name }} <small class="text-muted"><em>{{ player.rating }}</em>{% if
-                                player.advances %} -
-                                <em><b>x</b></em>{% endif %}</small></h6><a href="{{ player.url }}" target="_blank">{{
+                            {{ player.last_name }} <small class="text-muted"><em>{{ player.rating }}</em></small></h6><a
+                            href="{{ player.url }}" target="_blank">{{
                             player.username }}</a>
                     </div>
                     <div class="col-2 place">

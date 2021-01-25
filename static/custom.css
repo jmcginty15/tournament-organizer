@@ -22,7 +22,7 @@ h3 {
     margin-left: 5px;
 }
 
-#standings, #semifinals, #finals, #this-week, #schedule {
+#standings, #semifinals, #finals, #this-week, #schedule, #results {
     background-color: white;
     border: 1px solid rgba(0, 0, 0, 0.125);
     border-radius: 0.25rem;
@@ -56,7 +56,7 @@ h3 {
     font-weight: bold;
 }
 
-#this-week, #schedule, #semifinals {
+#this-week, #schedule, #semifinals, #finals {
     display: none;
 }
 
@@ -118,4 +118,20 @@ h3 {
 #advance-info, #advance-info-semifinals, #advance-info-finals {
     padding-top: 10px;
     padding-left: 15px;
+}
+
+.first {
+    background-color: gold;
+}
+
+.second {
+    background-color: silver;
+}
+
+.third {
+    background-color: #cd7f32;
+}
+
+.place {
+    font-weight: bold;
 }

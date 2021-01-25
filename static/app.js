@@ -1,5 +1,7 @@
 const $poolGrids = $('.pool-grid');
 const $scheduleGrids = $('.schedule-grid');
+const $resultsButton = $('#results-nav');
+const $resultsDisplay = $('#results');
 const $standingsButton = $('#standings-nav');
 const $semifinalsButton = $('#semifinals-nav');
 const $finalsButton = $('#finals-nav');
@@ -37,21 +39,49 @@ if (window.innerWidth <= 550) {
 $playoffRows.width($widthSetter.width());
 $standingsDisplay.hide();
 
+$resultsButton.on('click', function () {
+    $('.flash-message').hide();
+
+    $resultsDisplay.show();
+    $standingsDisplay.hide();
+    $semifinalsDisplay.hide();
+    $finalsDisplay.hide();
+    $thisWeekDisplay.hide();
+    $scheduleDisplay.hide();
+
+    $resultsButton.addClass('active');
+    $standingsButton.removeClass('active');
+    $semifinalsButton.removeClass('active');
+    $finalsButton.removeClass('active');
+    $thisWeekButton.removeClass('active');
+    $scheduleButton.removeClass('active');
+
+    $resultsButton.removeClass('inactive');
+    $standingsButton.addClass('inactive');
+    $semifinalsButton.addClass('inactive');
+    $finalsButton.addClass('inactive');
+    $thisWeekButton.addClass('inactive');
+    $scheduleButton.addClass('inactive');
+});
+
 $standingsButton.on('click', function () {
     $('.flash-message').hide();
 
+    $resultsDisplay.hide();
     $standingsDisplay.show();
     $semifinalsDisplay.hide();
     $finalsDisplay.hide();
     $thisWeekDisplay.hide();
     $scheduleDisplay.hide();
 
+    $resultsButton.removeClass('active');
     $standingsButton.addClass('active');
     $semifinalsButton.removeClass('active');
     $finalsButton.removeClass('active');
     $thisWeekButton.removeClass('active');
     $scheduleButton.removeClass('active');
 
+    $resultsButton.addClass('inactive');
     $standingsButton.removeClass('inactive');
     $semifinalsButton.addClass('inactive');
     $finalsButton.addClass('inactive');
@@ -62,18 +92,21 @@ $standingsButton.on('click', function () {
 $semifinalsButton.on('click', function () {
     $('.flash-message').hide();
 
+    $resultsDisplay.hide();
     $standingsDisplay.hide();
     $semifinalsDisplay.show();
     $finalsDisplay.hide();
     $thisWeekDisplay.hide();
     $scheduleDisplay.hide();
 
+    $resultsButton.removeClass('active');
     $standingsButton.removeClass('active');
     $semifinalsButton.addClass('active');
     $finalsButton.removeClass('active');
     $thisWeekButton.removeClass('active');
     $scheduleButton.removeClass('active');
 
+    $resultsButton.addClass('inactive');
     $standingsButton.addClass('inactive');
     $semifinalsButton.removeClass('inactive');
     $finalsButton.addClass('inactive');
@@ -84,18 +117,21 @@ $semifinalsButton.on('click', function () {
 $finalsButton.on('click', function () {
     $('.flash-message').hide();
 
+    $resultsDisplay.hide();
     $standingsDisplay.hide();
     $semifinalsDisplay.hide();
     $finalsDisplay.show();
     $thisWeekDisplay.hide();
     $scheduleDisplay.hide();
 
+    $resultsButton.removeClass('active');
     $standingsButton.removeClass('active');
     $semifinalsButton.removeClass('active');
     $finalsButton.addClass('active');
     $thisWeekButton.removeClass('active');
     $scheduleButton.removeClass('active');
 
+    $resultsButton.addClass('inactive');
     $standingsButton.addClass('inactive');
     $semifinalsButton.addClass('inactive');
     $finalsButton.removeClass('inactive');
@@ -106,18 +142,21 @@ $finalsButton.on('click', function () {
 $thisWeekButton.on('click', function () {
     $('.flash-message').hide();
 
+    $resultsDisplay.hide();
     $standingsDisplay.hide();
     $semifinalsDisplay.hide();
     $finalsDisplay.hide();
     $thisWeekDisplay.show();
     $scheduleDisplay.hide();
 
+    $resultsButton.removeClass('active');
     $standingsButton.removeClass('active');
     $semifinalsButton.removeClass('active');
     $finalsButton.removeClass('active');
     $thisWeekButton.addClass('active');
     $scheduleButton.removeClass('active');
 
+    $resultsButton.addClass('inactive');
     $standingsButton.addClass('inactive');
     $semifinalsButton.addClass('inactive');
     $finalsButton.addClass('inactive');
@@ -128,18 +167,21 @@ $thisWeekButton.on('click', function () {
 $scheduleButton.on('click', function () {
     $('.flash-message').hide();
 
+    $resultsDisplay.hide();
     $standingsDisplay.hide();
     $semifinalsDisplay.hide();
     $finalsDisplay.hide();
     $thisWeekDisplay.hide();
     $scheduleDisplay.show();
 
+    $resultsButton.removeClass('active');
     $standingsButton.removeClass('active');
     $semifinalsButton.removeClass('active');
     $finalsButton.removeClass('active');
     $thisWeekButton.removeClass('active');
     $scheduleButton.addClass('active');
 
+    $resultsButton.addClass('inactive');
     $standingsButton.addClass('inactive');
     $semifinalsButton.addClass('inactive');
     $finalsButton.addClass('inactive');

@@ -62,7 +62,21 @@ def tournament(id):
     if session.get('admin'):
         admin = True
 
-    return render_template('tournament.html', tournament=tournament, pools=pools, finals=finals, semifinals=semifinals, weeks=weeks, current_week=current_week, current_week_ends=current_week_ends, admin=admin)
+    first = PlayerTournament.query.filter_by(player_id=12).first()
+    second = PlayerTournament.query.filter_by(player_id=1).first()
+    third = PlayerTournament.query.filter_by(player_id=2).first()
+    fourth = PlayerTournament.query.filter_by(player_id=16).first()
+    placers = [DisplayPlayer(first), DisplayPlayer(second), DisplayPlayer(third), DisplayPlayer(fourth)]
+    placers[0].place = '1st'
+    placers[0].record = '12/12'
+    placers[1].place = '2nd'
+    placers[1].record = '9.5/15'
+    placers[2].place = '3rd'
+    placers[2].record = '11.5/16'
+    placers[3].place = '4th'
+    placers[3].record = '5/13'
+
+    return render_template('tournament.html', tournament=tournament, pools=pools, finals=finals, semifinals=semifinals, weeks=weeks, current_week=current_week, current_week_ends=current_week_ends, admin=admin, placers=placers)
 
 
 @app.route('/games/<int:id>')

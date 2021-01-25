@@ -9,12 +9,37 @@
     <p class="alert-success flash-message">{{ message }}</p>
     {% endfor %}
     <ul id="nav-bar" class="nav nav-tabs">
+        <li class="nav-item"><a id="results-nav" class="nav-link active">Results</a></li>
         <li class="nav-item"><a id="standings-nav" class="nav-link">Pool Standings</a></li>
         <li class="nav-item"><a id="semifinals-nav" class="nav-link">Semifinals</a></li>
-        <li class="nav-item"><a id="finals-nav" class="nav-link active">Finals</a></li>
-        <li class="nav-item"><a id="this-week-nav" class="nav-link">This Week</a></li>
+        <li class="nav-item"><a id="finals-nav" class="nav-link">Finals</a></li>
+        <!-- <li class="nav-item"><a id="this-week-nav" class="nav-link">This Week</a></li> -->
         <li class="nav-item"><a id="schedule-nav" class="nav-link">Full Schedule</a></li>
     </ul>
+    <div id="results" class="container">
+        <h3>Final Placings</h3>
+        <ul class="list-group">
+            {% for player in placers %}
+            <li id="player-{{ player.seed }}-s" class="list-group-item  {% if player.place == '1st' %}first{% elif player.place == '2nd' %}second{% elif player.place == '3rd' %}third{% endif %}">
+                <div class="row">
+                    <div class="col-3 place">
+                        {{ player.place }} place
+                    </div>
+                    <div class="col-7">
+                        <h6><small class="text-muted">{{ player.seed }}</small> {{ player.first_name }}
+                            {{ player.last_name }} <small class="text-muted"><em>{{ player.rating }}</em>{% if
+                                player.advances %} -
+                                <em><b>x</b></em>{% endif %}</small></h6><a href="{{ player.url }}" target="_blank">{{
+                            player.username }}</a>
+                    </div>
+                    <div class="col-2 place">
+                        {{ player.record }}
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
     <div id="standings" class="container">
         <div id="advance-info" class="row">
             <h6><small class="text-muted"><em><b>x</b> - advances to semifinals</em></small></h6>
@@ -30,8 +55,8 @@
                         <div class="row">
                             <div class="col-10">
                                 <h6><small class="text-muted">{{ player.seed }}</small> {{ player.first_name }}
-                                    {{ player.last_name }} <small
-                                        class="text-muted"><em>{{ player.rating }}</em>{% if player.advances %} -
+                                    {{ player.last_name }} <small class="text-muted"><em>{{ player.rating }}</em>{% if
+                                        player.advances %} -
                                         <em><b>x</b></em>{% endif %}</small></h6><a href="{{ player.url }}"
                                     target="_blank">{{ player.username }}</a>
                             </div>
@@ -59,8 +84,8 @@
                         <div class="row">
                             <div class="col-10">
                                 <h6><small class="text-muted">{{ player.seed }}</small> {{ player.first_name }}
-                                    {{ player.last_name }} <small
-                                        class="text-muted"><em>{{ player.rating }}</em>{% if player.advances %} -
+                                    {{ player.last_name }} <small class="text-muted"><em>{{ player.rating }}</em>{% if
+                                        player.advances %} -
                                         <em><b>x</b></em>{% endif %}</small></h6><a href="{{ player.url }}"
                                     target="_blank">{{ player.username }}</a>
                             </div>
@@ -88,8 +113,8 @@
                         <div class="row">
                             <div class="col-10">
                                 <h6><small class="text-muted">{{ player.seed }}</small> {{ player.first_name }}
-                                    {{ player.last_name }} <small
-                                        class="text-muted"><em>{{ player.rating }}</em>{% if player.advances %} -
+                                    {{ player.last_name }} <small class="text-muted"><em>{{ player.rating }}</em>{% if
+                                        player.advances %} -
                                         <em><b>x</b></em>{% endif %}</small></h6><a href="{{ player.url }}"
                                     target="_blank">{{ player.username }}</a>
                             </div>
@@ -102,7 +127,7 @@
             {% endfor %}
         </div>
     </div>
-    <div id="this-week" class="container">
+    <!-- <div id="this-week" class="container">
         <h3>{{ current_week.name }}</h3>
         <p id="week-end-date" class="text-muted"><em>Ends {{ current_week_ends.strftime('%a %b %d, %I:%M %p') }}</em></p>
         <ul class="list-group">
@@ -160,7 +185,7 @@
             </li>
             {% endfor %}
         </ul>
-    </div>
+    </div> -->
     <div id="schedule" class="container">
         <div class="row">
             {% for week in weeks %}
@@ -174,7 +199,8 @@
                                 {% if game.result %}
                                 <small class="text-muted">Game complete</small>
                                 {% else %}
-                                <small class="text-muted">{% if game.schedule %}{{ game.schedule.strftime('%a %b %d, %I:%M %p') }}{% else %}Schedule
+                                <small class="text-muted">{% if game.schedule %}{{ game.schedule.strftime('%a %b %d,
+                                    %I:%M %p') }}{% else %}Schedule
                                     TBD{% endif %}</small>
                                 {% endif %}
                             </div>
@@ -182,21 +208,23 @@
                         <div class="row">
                             <div class="col-10">
                                 <h6><span class="white">&nbsp;&nbsp;&nbsp;&nbsp;</span> <a href="{{ game.white.url }}"
-                                        target="_blank">{{ game.white.username }}</a> <small
-                                        class="text-muted"><em>{{ game.white.rating }}</em></small></h6>
+                                        target="_blank">{{ game.white.username }}</a> <small class="text-muted"><em>{{
+                                            game.white.rating }}</em></small></h6>
                             </div>
                             <div class="col-2 score-box">
-                                {% if game.result %}{% if game.result == '1-0' %}1{% elif game.result == '0.5-0.5' %}0.5{% else %}0{% endif %}{% endif %}
+                                {% if game.result %}{% if game.result == '1-0' %}1{% elif game.result == '0.5-0.5'
+                                %}0.5{% else %}0{% endif %}{% endif %}
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-10">
                                 <h6><span class="black">&nbsp;&nbsp;&nbsp;&nbsp;</span> <a href="{{ game.black.url }}"
-                                        target="_blank">{{ game.black.username }}</a> <small
-                                        class="text-muted"><em>{{ game.black.rating }}</em></small></h6>
+                                        target="_blank">{{ game.black.username }}</a> <small class="text-muted"><em>{{
+                                            game.black.rating }}</em></small></h6>
                             </div>
                             <div class="col-2 score-box">
-                                {% if game.result %}{% if game.result == '0-1' %}1{% elif game.result == '0.5-0.5' %}0.5{% else %}0{% endif %}{% endif %}
+                                {% if game.result %}{% if game.result == '0-1' %}1{% elif game.result == '0.5-0.5'
+                                %}0.5{% else %}0{% endif %}{% endif %}
                             </div>
                         </div>
                         {% if game.result %}
@@ -210,7 +238,8 @@
                         {% else %}
                         <div class="row">
                             <div class="col-6"><button type="button" id="schedule-{{ game.id }}"
-                                    class="btn btn-outline-secondary schedule-button">{% if game.schedule %}Reschedule{% else %}Schedule{% endif %}</button>
+                                    class="btn btn-outline-secondary schedule-button">{% if game.schedule %}Reschedule{%
+                                    else %}Schedule{% endif %}</button>
                             </div>
                             <div class="col-6 schedule-button-container">
                                 <button type="button" id="report-{{ game.id }}"
